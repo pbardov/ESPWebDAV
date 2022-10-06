@@ -1088,7 +1088,7 @@ void ESPWebDAVCore::handlePut(ResourceType resource)
             size_t written = 0;
             while (written < numRead)
             {
-                auto numWrite = file.write(buf + written, numRead - written);
+                auto numWrite = file.write((const uint8_t*)(buf + written), numRead - written);
                 if (numWrite == 0 || (int)numWrite == -1)
                 {
                     DBG_PRINT("error: numread=%d write=%d written=%d", (int)numRead, (int)numWrite, (int)written);
@@ -1783,5 +1783,3 @@ void ESPWebDAVCore::processRange(const String& range)
     }
     DBG_PRINT("Range: %d -> %d", _rangeStart, _rangeEnd);
 }
-
-
